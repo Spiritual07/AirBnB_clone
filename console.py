@@ -109,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
                 if key.split(".")[0] == command[0]:
                     print(str(value))
 
-    def do_update(slef, args):
+    def do_update(self, args):
         """Updates an instance based on the class name and id by adding
         or updating attribute (save the change into the JSON file).
         Usage: update <class name> <id> <attribute name> "<attribute value>"
@@ -140,6 +140,51 @@ class HBNBCommand(cmd.Cmd):
                     pass
                 setattr(obj, attribute_name, attribute_value)
                 obj.save()
+
+    def default(self, args):
+        """Default behaviour for cmd module for invalid sytax"""
+
+        method_dict = {
+            "all": self.do_all,
+            "show": self.do_show,
+            "update": self.do_update,
+            "destroy": self.do_destroy,
+            "count": self.do_count
+        }
+
+        args_list = args.split('.')
+        InputClassName = args_list[0]
+        command = args_list[1].split('(')
+        InputMethod = command[0]
+        extra_arg = command[1].split(')')[0]
+        all_args = extra_arg.split(',')
+
+        if InputMethod in method_dict.keys():
+            if InputMethod == "update":
+                object_id = all_args[0]
+                attr_name = all_args[1]
+                attr_value = all_args[2]
+                return method_dict[InputMethod]("{} {} {} {}".format(
+                            InputClassName, object_id, attr_name, attr_value))
+            else:
+                return method_dict[InputMethod]("{} {}".format(InputClassName,
+                                                               extra_arg))
+
+        print("***Unkown syntax: {}".format(args))
+        return False
+
+    def do_count(self, args):
+        """Count and retrieves the number of instances of a class
+        Usage: <class_name>.count()
+        """
+
+        objects = storage.all()
+        command = shlex.split(args)
+        count = 0
+        for obj in objects.values():
+            if command[0] == obj.__class__.__name__:
+                count += 1
+        print(count)
 
 
 if __name__ == "__main__":
