@@ -12,6 +12,7 @@ import unittest
 from models.amenity import Amenity
 from datetime import datetime
 
+
 class TestAmenity_save(unittest.TestCase):
     """Unittests for testing save method of the Amenity class."""
 
@@ -63,6 +64,7 @@ class TestAmenity_save(unittest.TestCase):
         with open("file.json", "r") as f:
             self.assertIn(a_id, f.read())
 
+
 class TestAmenity_to_dict(unittest.TestCase):
     """Unittests for testing to_dict method of the Amenity class."""
 
@@ -111,7 +113,8 @@ class TestAmenity_to_dict(unittest.TestCase):
         a = Amenity()
         with self.assertRaises(TypeError):
             a.to_dict(None)
-    
+
+
 class TestAmenity_instantiation(unittest.TestCase):
     """Unittests for testing instantiation of the Amenity class."""
 
@@ -185,6 +188,7 @@ class TestAmenity_instantiation(unittest.TestCase):
     def test_instantiation_with_None_kwargs(self):
         with self.assertRaises(TypeError):
             Amenity(id=None, created_at=None, updated_at=None)
+
 
 if __name__ == "__main__":
     unittest.main()

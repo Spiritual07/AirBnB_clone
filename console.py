@@ -12,12 +12,13 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """Simple command interpreter
         Attributes:
         prompt (str): The command prompt.
     """
-    
+
     prompt = "(hbnb) "
 
     available_classes = ["BaseModel", "User"]
@@ -26,17 +27,18 @@ class HBNBCommand(cmd.Cmd):
         """EOF signal to exit the program."""
         print("")
         return True
-    
+
     def do_quit(self, args):
         """Quit command to exit the program."""
         return True
-    
+
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
         pass
 
     def do_create(self, args):
-        """Creates a new instance, saves it (to the JSON file) and prints the id
+        """Creates a new instance, saves it (to the JSON file)
+        and prints the id
         Usage: create <class_name>
         """
         command = shlex.split(args)
@@ -48,9 +50,10 @@ class HBNBCommand(cmd.Cmd):
             new_instance = eval(f"{command[0]}()")
             storage.save()
             print(new_instance.id)
-    
+
     def do_show(self, args):
-        """Prints the string representation of an instance based on the class name and id
+        """Prints the string representation of an instance
+        based on the class name and id
         Usage: show <class_name> <id>
         """
         command = shlex.split(args)
@@ -67,9 +70,10 @@ class HBNBCommand(cmd.Cmd):
                 print(object[key])
             else:
                 print("** no instance found **")
-    
+
     def do_destroy(self, args):
-        """Deletes an instance based on the class name and id (save the change into the JSON file
+        """Deletes an instance based on the class name and id
+        (save the change into the JSON file
         Usage: destroy <class_name> <id>
         """
         command = shlex.split(args)
@@ -87,16 +91,17 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
             else:
                 print("** no instance found **")
-    
+
     def do_all(self, args):
-        """Prints all string representation of all instances based or not on the class name.
+        """Prints all string representation of all instances
+        based or not on the class name.
         Usage: all <class_name> or all
         """
         object = storage.all()
         command = shlex.split(args)
         if len(command) == 0:
             for key, value in object.items():
-                print(str(value)) 
+                print(str(value))
         elif command[0] not in HBNBCommand.available_classes:
             print("** class doesn't exist **")
         else:
@@ -105,8 +110,8 @@ class HBNBCommand(cmd.Cmd):
                     print(str(value))
 
     def do_update(slef, args):
-        """Updates an instance based on the class name and id by adding or updating
-        attribute (save the change into the JSON file).
+        """Updates an instance based on the class name and id by adding
+        or updating attribute (save the change into the JSON file).
         Usage: update <class name> <id> <attribute name> "<attribute value>"
         """
         command = shlex.split(args)
@@ -135,6 +140,7 @@ class HBNBCommand(cmd.Cmd):
                     pass
                 setattr(obj, attribute_name, attribute_value)
                 obj.save()
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

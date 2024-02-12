@@ -12,6 +12,7 @@ import unittest
 from models.city import City
 from datetime import datetime
 
+
 class TestCity_instantiation(unittest.TestCase):
     """
     Unittests for instantiation of the City class.

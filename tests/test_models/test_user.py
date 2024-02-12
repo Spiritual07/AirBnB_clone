@@ -12,6 +12,7 @@ import unittest
 from models.user import User
 from datetime import datetime
 
+
 class TestUser_instantiation(unittest.TestCase):
     """
     Unittests for testing instantiation of the User class.
@@ -114,7 +115,7 @@ class TestUser_save(unittest.TestCase):
             os.rename("tmp", "file.json")
         except FileNotFoundError:
             pass
-    
+
     def test_one_save(self):
         u = User()
         sleep(0.05)
@@ -194,6 +195,7 @@ class TestUser_to_dict(unittest.TestCase):
         u = User()
         with self.assertRaises(TypeError):
             u.to_dict(None)
+
 
 if __name__ == "__main__":
     unittest.main()

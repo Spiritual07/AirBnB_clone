@@ -12,6 +12,7 @@ import unittest
 from models.review import Review
 from datetime import datetime
 
+
 class TestReview_instantiation(unittest.TestCase):
     """
     Unittests for testing instantiation of the Review class.
@@ -69,10 +70,10 @@ class TestReview_instantiation(unittest.TestCase):
 
     def test_str_representation(self):
         MyDate = datetime.today()
-        MyDateRepr = repr(MyDate )
+        MyDateRepr = repr(MyDate)
         r = Review()
         r.id = "607999"
-        r.created_at = r.updated_at = MyDate 
+        r.created_at = r.updated_at = MyDate
         review_str = r.__str__()
         self.assertIn("[Review] (607999)", review_str)
         self.assertIn("'id': '607999'", review_str)
@@ -84,7 +85,7 @@ class TestReview_instantiation(unittest.TestCase):
         self.assertNotIn(None, r.__dict__.values())
 
     def test_instantiation_with_kwargs(self):
-        MyDate  = datetime.today()
+        MyDate = datetime.today()
         MyDate_iso = MyDate.isoformat()
         review = Review(id="607", created_at=MyDate_iso, updated_at=MyDate_iso)
 
@@ -187,7 +188,7 @@ class TestReview_to_dict(unittest.TestCase):
         MyDate = datetime.today()
         r = Review()
         r.id = "607999"
-        r.created_at = r.updated_at = MyDate 
+        r.created_at = r.updated_at = MyDate
         to_dict = {
             'id': '607999',
             '__class__': 'Review',
