@@ -21,7 +21,8 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
-    available_classes = ["BaseModel", "User"]
+    available_classes = ["BaseModel", "User", "State", "Review",
+                         "Place", "City", "Amenity"]
 
     def do_EOF(self, args):
         """EOF signal to exit the program."""
