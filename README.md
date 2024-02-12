@@ -21,6 +21,7 @@ Update an attribute of an object	(hbnb) update <class> <id> <attribute name> "<a
 Non-interactive mode example
 
 $ echo "help" | ./console.py
+
 (hbnb)
 
 Documented commands (type help <topic>):
